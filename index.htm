@@ -1,0 +1,83 @@
+<!doctype html>
+<html><head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Split-Flap Display Control</title>
+  
+  <script type="text/javascript" src="/js/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript" src="/js/underscore-min.js"></script>
+  <script type="text/javascript" src="js/splitflap.js"></script>
+  <link type="text/css" rel="stylesheet" href="/css/reset.css" />
+  <link type="text/css" rel="stylesheet" href="css/splitflap.css" />
+  <style>
+      body
+      {
+	  position: absolute;
+	  width: 100%;	  
+	  margin: 0 auto;
+	  height: 300px;
+	  top: 40%;
+	  margin-top: -74px;
+	  text-align: center;
+	  font-size: 30px;
+      }
+      #split-flap
+      {
+	  margin-bottom: 70px;
+      }
+      #split-flap .segment
+      {
+	  font-family: sans-serif;
+	  width: 145px;
+      }
+      #split-flap .segment:first-child .top li
+      {
+	  border-top-left-radius: 20px;
+      }
+      #split-flap .segment:last-child .top li
+      {
+	  border-top-right-radius: 20px;
+      }
+      #split-flap .segment:first-child .bottom li
+      {
+	  border-bottom-left-radius: 20px;
+      }
+      #split-flap .segment:last-child .bottom li
+      {
+	  border-bottom-right-radius: 20px;
+      } 
+  </style>
+    
+<script type="text/javascript">//<![CDATA[ 
+$(window).load(function(){
+	var disp = new display($("#split-flap"), 6, {initial: "HELLO,", values: [" ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q","R","S","T","U","V","W","X","Y","Z",".","?","!",","]});
+      setTimeout(function(){disp.print("WORLD")}, 1900);
+      $("#print").on("submit", function(e)
+	  {
+	    var input = $("#print input");
+	    disp.print(input.val());
+	    input.val("");
+	    e.preventDefault();
+	  });
+});//]]>  
+
+</script>
+<script id="tmpl_flap" type="text/template">
+    <li><%=data%></li>
+</script>
+<script id="tmpl_segment" type="text/template">
+<div class="segment">
+    <ol class="top">
+    </ol>
+    <ol class="bottom">
+    </ol>
+</div>
+</script>
+
+</head>
+<body>
+<div id="split-flap">
+</div>
+<form id="print" action="javascript:">
+    display.print("<input type="text" name="text" size="6"></input>");
+</form>
+</body></html>

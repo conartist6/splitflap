@@ -1,0 +1,95 @@
+    .split-flap .segment
+{  
+    position: relative;
+    display: inline-block;
+    margin: 0 4px;
+}
+
+.split-flap:after
+{
+    content: " ";
+    display: table;
+    clear: both;
+}
+
+.split-flap .segment ol
+{
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+
+.split-flap .segment li
+{
+    position: absolute;
+    display: block;
+    top:0;
+    left: 0;
+    overflow: hidden;
+    text-align: center;
+    font-size: 150px;
+    height: .48em;
+    width: 100%;
+}
+
+.split-flap .top li:first-child
+{
+    position: static;
+}
+
+.split-flap .bottom li:last-child
+{
+    position: static;
+}
+
+.split-flap .top li.falling
+{
+    -webkit-transform: scaleY(0);
+    transform: scaleY(0);
+}
+
+.split-flap .top li
+{
+    color: #FFF;    
+    background-color: #222;
+    -webkit-border-top-left-radius: 7px;
+    -webkit-border-top-right-radius: 7px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    -webkit-transition: -webkit-transform 110ms 0 ease-out;
+    transition: transform 110ms 0ms ease-out;
+    -webkit-transform: scaleY(1);
+    -webkit-transform-origin: 50% 100%;
+    transform: scaleY(1);
+    transform-origin: 50% 100%;
+}
+
+.split-flap .segment ol.top
+{
+    margin-bottom: 4px;
+    line-height: 1;
+}
+
+.split-flap .bottom li
+{
+    color: #CCC;
+    line-height: 0;
+    background-color: #151515;
+    -webkit-transition: -webkit-transform 100ms 60ms ease-in;
+    transition: transform 100ms 60ms ease-in;
+    -webkit-border-bottom-right-radius: 7px;
+    -webkit-border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    border-bottom-left-radius: 7px;
+    -webkit-transform-origin: 50% 0;
+    transform-origin: 50% 0;
+
+    -webkit-transform: scaleY(0);
+    transform: scaleY(0);
+}
+
+.split-flap .bottom li.current, .split-flap .bottom li.falling
+{
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+}
