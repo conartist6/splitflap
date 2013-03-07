@@ -98,12 +98,18 @@ $(window).load(function()
       
       function display(el, segments, settings)
       {
-          this.el = $(el);
+	  if(!el) this.el = $("<div></div>")
+	  else if(el.jquery) this.el = el
+	  else this.el = $(el);
+	  if(arguments[arguments.length-1] && typeof arguments[arguments.length-1] == "object")
+	  {
+	      settings = arguments[arguments.length-1];
+	      if(arguments.length == 2) segments = undefined;
+	  }
           this.settings = settings;
-          el.addClass("split-flap");
+          this.el.addClass("split-flap");
           if(!this.settings) this.settings = [];
-          if(this.settings['tickLength']) this.tickMs = 
-this.settings['tickLength'];
+          if(this.settings['tickLength']) this.tickMs = this.settings['tickLength'];
           else this.tickMs = 120;
           this.cacheFrames = 2;
           var numeric = digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -127,14 +133,14 @@ this.settings['tickLength'];
 	  }
           var initial = this.settings['initial'];
           if(typeof initial == "string") initial = initial.split("");
-          if(initial && !segments) this.segments = initial.length;
+          if(initial && !segments) segments = initial.length;
           else if(!segments) segments = 7;
           
 	  //Render a segment template in order to snatch values out of its css
           var tempSegment = $(segment.prototype.template()), tempTop, tempBot;
           tempTop = tempSegment.find(".top").append($(flap.prototype.template()));
           tempBot = tempSegment.find(".bottom").append($(flap.prototype.template()));
-          $("#split-flap").append(tempSegment);
+          this.el.append(tempSegment);
 	  tempTop = tempTop.children("li").first();
 	  this.stylePrefix = "";
 	  if(tempTop.css("-webkit-transition-duration")) this.stylePrefix = "-webkit-"; 

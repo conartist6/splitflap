@@ -49,7 +49,7 @@
     
 <script type="text/javascript">//<![CDATA[ 
 $(window).load(function(){
-	var disp = new display($("#split-flap"), 6, {initial: "HELLO,", values: [" ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q","R","S","T","U","V","W","X","Y","Z",".","?","!",","]});
+	var disp = new display($("#split-flap"), {initial: "HELLO", values: [" ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q","R","S","T","U","V","W","X","Y","Z",".","?","!",","]});
       setTimeout(function(){disp.print("WORLD")}, 1900);
       $("#print").on("submit", function(e)
 	  {
@@ -75,6 +75,7 @@ $(window).load(function(){
 
 </head>
 <body>
+<a href="https://github.com/conartist6/splitflap"><img style="position: fixed; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
 <div id="split-flap">
 </div>
 <form id="print" action="javascript:">
