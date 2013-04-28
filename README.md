@@ -12,7 +12,7 @@ The goal of this code is to replicate as exactly as possible the unique aestheti
 
 Note in the linked video that the display lends itself to two styles. One style is that of the general message area at the bottom of the board, which is simply an array of displays each of which is capable of displaying letters, numbers, and as much punctation as might be needed to spell out a message. The other style can be seen in train destinations. Though these could easily be created in a similar way, mechanical boards preferenced whole-word segments where possible, as it was both cheaper not to replicate the electronics for each letter and more readable since monospace font was not a requirement. In a segment like this a flip might go from "Boston" to "Grand Central" It is the goal of this project to support both these styles, and in fact it shouldbe possible (if sluggish) to replicate even the board seen in the video.
 
-Creating A Board:
+Creating A Display:
 =================
 
 It will be possible to create a board in one of two ways, both of which are shown on the demo page.
