@@ -3,10 +3,10 @@ About:
 
 This tool is meant to create a digital display in the style of a Solari split-flap display of the type that were at one time common in train stations. For those who haven't seen one recently, a decent video of one is here http://www.youtube.com/watch?v=U8azGTsslNc&feature=fvwp. First, some terminology:
 
-*display*: A complete display, such as the train board. It's easiest to think of it as a rolodex where somebody wrote on the backs of the cards as well as the front of them. Wait a second, if you don't know what a split flap display is, you probably never used a rolodex.
-*segment*: The components which make up a display. Each segment must flip to show something different.
-*glyph*: Something a segment can show. Could be anything. In a real display it is drawn on halves of two different cards.
-*glyph set*: The complete set of glyphs that a segment is capable of displaying. IRL, the set of cards inside a given segment.
+*display*: A complete display, such as the train board. It's easiest to think of it as a rolodex where somebody wrote on the backs of the cards as well as the front of them. Wait a second, if you don't know what a split flap display is, you probably never used a rolodex.  
+*segment*: The components which make up a display. Each segment must flip to show something different.  
+*glyph*: Something a segment can show. Could be anything. In a real display it is drawn on halves of two different cards.  
+*glyph set*: The complete set of glyphs that a segment is capable of displaying. IRL, the set of cards inside a given segment.  
 
 The goal of this code is to replicate as exactly as possible the unique aesthetics of those displays, and so unlike some other facsimilies, this tool will always have to flip through it's full set of glyphs in order to change an alphabetic segment displaying a "b" over to an "a". As far as I am aware this is the only online facsimile that functions in this manner and also renders segments using regular fonts and not images.
 
