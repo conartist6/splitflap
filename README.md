@@ -24,11 +24,13 @@ It will be possible to create a board in one of two ways, both of which are show
 Settings:
 =========
 
-**glyphSet** This setting controls what glyphs will be available for use in a display segment. If a string is given it will be split by character and each character will be a glyph. If an array is given each array element must be a string, and will be used as a glyph. If an array with no numeric indicies is given, it will be assumed that the input is a map from css selectors to either strings or arrays. Since some glyph sets are quite common they are stored in the splitflap object's constructor. A reference for them is below. If I were building the train station board shown in the video linked, I would set it up the hard way, and add classes to my segments. They might end up looing like class="segment alphanumeric", class="segment digit",and class="segment trainstation". Then I would define the value for this setting as {".alphanumeric": $.display.alphanumeric, ".digit": "0123456789", ".trainstation": ["Boston", "Grand Central", "Old Saybrook", "Washington"]}.
+**glyphSet** This setting controls what glyphs will be available for use in a display segment. If a string is given it will be split by character and each character will be a glyph. If an array is given each array element must be a string, and will be used as a glyph. If an array with no numeric indicies is given, it will be assumed that the input is a map from CSS selectors to either strings or arrays. Since some glyph sets are quite common they are stored in the splitflap object's constructor. A reference for them is below. If I were building the train station board shown in the video linked, I would set it up the hard way, and add classes to my segments. They might end up looing like class="segment alphanumeric", class="segment digit",and class="segment trainstation". Then I would define the value for this setting as {".alphanumeric": $.display.alphanumeric, ".digit": "0123456789", ".trainstation": ["Boston", "Grand Central", "Old Saybrook", "Washington"]}.
 The default glyph set is alphanumeric for all segments.
 
-**tickLength** If a display is flipping as fast as possible to get to the next card, how many milliseconds will it wait to perorm the next flip? Internally this also affects optimization. If tickLength is 1000, and a complete flip takes only 250ms, then only two flaps will ever be visible at a time, and the display will compensate accordingly. If however tickms is 100 and a complete flip takes 250ms, then up to 3 cards may be showing at any given time. It is possible to adjust the animation lengths using css, and the display will in fact adjust its internal parameters accordingly.
+**tickLength** If a display is flipping as fast as possible to get to the next card, how many milliseconds will it wait to perorm the next flip? Internally this also affects optimization. If tickLength is 1000, and a complete flip takes only 250ms, then only two flaps will ever be visible at a time, and the display will compensate accordingly. If however tickms is 100 and a complete flip takes 250ms, then up to 3 cards may be showing at any given time. It is possible to adjust the animation lengths using CSS, and the display will in fact adjust its internal parameters accordingly.
 The default tickLength is 120ms. Values < 1 are illegal. Very low values should be used at your own risk.
+
+**case** Valid values for this setting are "upper" and "lower". Anything else will be ignored. If a value is specified all strings displayed will be converted to the specified case and any further glyph matching will be case insensitive.
 
 Usage
 =====
@@ -42,7 +44,10 @@ Prepackaged glyph sets
 
 alphabetic: " abcdefghijklmnopqrstuvwxyz"  
 alphanumeric:  " abcdefghijklmnopqrstuvwxyz0123456789"  
-decimal: "0123456789. "  
-digits: "012345679"  
+extended: " ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*.?\"+-=/<>:)("  
+huge: " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*.?\"+-=/<>:)("  
+decimal: " 0123456789."  
+digits: " 012345679"  
+hex: " 0123456789ABCDEF"  
 twelve: ["1","2","3","4","5","6","7","8","9","10","11","12"]  
 twentyfour: see twelve, but longer.  
