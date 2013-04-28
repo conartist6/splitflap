@@ -40,9 +40,9 @@ Once you have instantiated a display, the only function you care about is
 Prepackaged glyph sets
 ======================
 
-alphabetic: " abcdefghijklmnopqrstuvwxyz"
-alphanumeric:  " abcdefghijklmnopqrstuvwxyz0123456789"
-decimal: "0123456789. "
-digits: "012345679"
-twelve: ["1","2","3","4","5","6","7","8","9","10","11","12"]
-twentyfour: see twelve, but longer.
+alphabetic: " abcdefghijklmnopqrstuvwxyz"  
+alphanumeric:  " abcdefghijklmnopqrstuvwxyz0123456789"  
+decimal: "0123456789. "  
+digits: "012345679"  
+twelve: ["1","2","3","4","5","6","7","8","9","10","11","12"]  
+twentyfour: see twelve, but longer.  
