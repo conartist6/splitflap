@@ -60,14 +60,23 @@ $(".clock").splitflap(
     {
         glyphSet{
             ".hours .twentyfour": $.splitflap.twelve,
-            ".minutes": $.splitflap.minutes
+            ".minutes": $.splitflap.minutes,
+            ".ampm": ["AM", "PM"]
         }});
+```
+```css
+.hours, .minutes
+{
+    width: 140px;
+}
 ```
 ```html
 <div class="clock">
     <div class="segment hours twentyfour">
     </div> :
     <div class="segment minutes">
+    </div>
+    <div class="segment ampm">
     </div>
 </div>
 ```
