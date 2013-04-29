@@ -53,12 +53,10 @@ twelve: ["1","2","3","4","5","6","7","8","9","10","11","12"]
 twentyfour: see twelve, but longer.  
 minutes: ["00","01","02","3","4","5","6","7","8","9","10","11", ... ,"58","59"]
 
-Example
+Example: Clock
 =======
-
-**Alarm Clock**
 ```javascript
-$(".splitflap").splitflap(
+$(".clock").splitflap(
     {
         glyphSet{
             ".hours .twentyfour": $.splitflap.twelve,
@@ -66,7 +64,7 @@ $(".splitflap").splitflap(
         }});
 ```
 ```html
-<div class="splitflap">
+<div class="clock splitflap">
     <div class="segment hours twentyfour">
     </div> :
     <div class="segment minutes">
