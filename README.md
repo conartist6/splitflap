@@ -57,14 +57,21 @@ Example
 =======
 
 **Alarm Clock**
-$(".splitflap").splitflap({glyphSet{".hours .twelve": $.splitflap.twelve, ".minutes": $.splitflap.minutes}});
-
+```javascript
+$(".splitflap").splitflap(
+    {
+        glyphSet{
+            ".hours .twentyfour": $.splitflap.twelve,
+            ".minutes": $.splitflap.minutes
+        }});
+```
+```html
 <div class="splitflap">
-    <div class="segment hours">
+    <div class="segment hours twentyfour">
     </div> :
     <div class="segment minutes">
     </div>
 </div>
-
+```
 Demo
 ====
