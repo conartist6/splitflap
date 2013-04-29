@@ -73,3 +73,4 @@ $(".clock").splitflap(
 ```
 Demo
 ====
+Check out a working version at http://burningpotato.com/splitflap
