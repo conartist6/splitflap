@@ -17,7 +17,7 @@ Creating A Display:
 
 It will be possible to create a board in one of two ways, both of which are shown on the demo page.
 
-**The easy way** is to call the constructor on an empty element (it will be jquery wrapped if it isn't already) and pass as parameters the number of segments that should be created, and a settings object if desired. Reasonable defaults will be set wherever possible, and no arguments are strictly required. If an element is not supplied, the board will be created in a jquery wrapped div not attached to the DOM. If an element is supplied, segments will be created within it. If you just want to spell out some words, this is for you.
+**The easy way** is to call the constructor on an empty element and pass through the options object the number of segments that should be created, as well as any additional desired options. If you just want to spell out some words, this is for you.
 
 **The hard way** is to call the contructor on a nonempty element which contains somewhere within it's tag hierarchy one or more elements with the class segment, which will be used as the segments for the display. Why would you want to do this? The simplest reason is to set up a display with some static content. For example for a clock display showing 12:51, the colon need not be part of a segment, and in fact it should display much narrower than the digits. Using this approach static content can be mixed in with display segments, and the segments themselves can have additional classes applied for them both to help with their styling and to get them set up.
 
