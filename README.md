@@ -51,3 +51,20 @@ digits: " 012345679"
 hex: " 0123456789ABCDEF"  
 twelve: ["1","2","3","4","5","6","7","8","9","10","11","12"]  
 twentyfour: see twelve, but longer.  
+minutes: ["00","01","02","3","4","5","6","7","8","9","10","11", ... ,"58","59"]
+
+Example
+=======
+
+**Alarm Clock**
+$(".splitflap").splitflap({glyphSet{".hours .twelve": $.splitflap.twelve, ".minutes": $.splitflap.minutes}});
+
+<div class="splitflap">
+    <div class="segment hours">
+    </div> :
+    <div class="segment minutes">
+    </div>
+</div>
+
+Demo
+====
