@@ -192,3 +192,4 @@ $(window).load(function()
       }
       window.display = display;
   });
+//(function(){var i, j, minutes = []; for(i=0;i<7;i++){for(j=0;j<10;j++)minutes.push(""+i+j)}})();
