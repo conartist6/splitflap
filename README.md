@@ -64,7 +64,7 @@ $(".clock").splitflap(
         }});
 ```
 ```html
-<div class="clock splitflap">
+<div class="clock">
     <div class="segment hours twentyfour">
     </div> :
     <div class="segment minutes">
