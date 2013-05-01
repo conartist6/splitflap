@@ -22,6 +22,8 @@
       }
       .splitflap
       {
+	      font-size: 150px;
+		height: .48em;
 	  margin-bottom: 70px;
       }
       .splitflap .segment
@@ -29,6 +31,24 @@
 	  font-family: sans-serif;
 	  width: 145px;
       }
+	  #clock .segment
+	  {
+		width: 192px;
+	  }
+	  .twentyfour li
+	  {
+		text-align: right !important;
+	  }
+	  .twentyfour ol
+	  {
+		padding-right: 15px !important;
+	  }
+	  .ampm li
+	  {
+		font-size: 60px !important;
+		width: 120px !important;
+		border-radius: 8px !important;
+	  }
       .splitflap .segment:first-child .top li
       {
 	  border-top-left-radius: 20px;
@@ -62,15 +82,32 @@ $(window).load(function(){
 	    e.preventDefault();
 	  });
 
-
+	var now = new Date();
 	var clock = $("#clock").splitflap({
 			glyphSet:
 				{
-					".hours .twentyfour": $.splitflap.twentyfour,
+					".hours.twentyfour": $.splitflap.twentyfour,
 					".minutes": $.splitflap.minutes,
 					".ampm": ["AM", "PM"]
-				}
+				},
+			initial: [now.getHours().toString(), now.getMinutes().toString(), "AM"]
 			});
+
+
+  var timeout;
+
+  function customClock() {
+    var now = new Date();
+
+    // Set lag to just after next full second
+    var lag = 1015 - now.getMilliseconds();
+	timeout = setTimeout(customClock, lag);
+
+    $("#clock").splitflap("value", [now.getHours().toString(), now.getMinutes().toString(), "AM"]);
+    
+  }
+  setTimeout(customClock, (62 - now.getSeconds()) * 1000);
+
 });//]]>  
 
 </script>

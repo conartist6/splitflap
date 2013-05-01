@@ -8,12 +8,12 @@
         return Math.ceil(base);
     }
 
-    function numRange(start, end, zpad) {
+    function numRange(start, end) {
         function lzpad(string, paddedlen) {
             var padamt = paddedlen - string.length,
                 o;
             if (padamt > 0) {
-                for (o = new Arrayt; padamt > 0; o[--padamt] = "0");
+                for (o = new Array; padamt > 0; o[--padamt] = "0");
                 return (o.join("") + string);
             }
             return string;
@@ -24,8 +24,8 @@
         if (start.charAt(0) == "0") {
             zeropad = start.length;
         }
-        for (i = parseInt(start); i < parseInt(end); i++) {
-            output.push(lzpad(i.toString()));
+        for (i = parseInt(start); i <= parseInt(end); i++) {
+            output.push(lzpad(i.toString(), zeropad));
         }
         return output;
     }
@@ -43,14 +43,20 @@
         minutes: numRange("00", "59")
     }
 
+	var defaults = 	{
+            tickLength: 120,
+            glyphSet: glyphSets.alpabetic,
+            initial: "",
+            defaultSegments: 5
+        }
+
         function flap(value) {
             return $("<li>" + value + "</li>");
         }
 
-		//glyphSet is a mandatory argument, a null glyphset indicates a dry run (for internal use only)
-        function segment(display, element, glyphSet, initial) {
+        function segment(display, element, options) {
             if (!element) {
-				if(display.suppliedElements && glyphSet)
+				if(display.suppliedElements && !options.dryrun)
 				{
 					element = display.suppliedElements.eq(display.segments.length);
 				}
@@ -61,6 +67,14 @@
 				}
             }
             this.element = element;
+			var glyphSet = display.options.glyphSet,
+				glyphSetIndex = element.data("glyphSetIndex");
+
+			if(!options.dryrun && glyphSetIndex !== undefined)
+			{
+				glyphSet = glyphSet[glyphSetIndex];
+			}
+			else glyphSet = glyphSet[0];
 
             this.top = $("<ol class=\"top\"></ol>");
             $.extend(this.top, {
@@ -72,17 +86,17 @@
             });
             element.append(this.top, this.bot);
 
-            if (!glyphSet) {
+            if (options.dryrun) {
                 this.top.append(new flap(""));
                 this.bot.append(new flap(""));
-                return; //For use with css extraction;
+                return; 
             }
 
             var self = this;
             this.display = display;
             this.glyphSet = glyphSet;
-            if (!initial) initial = glyphSet[0];
-            this.target = initial;
+            if (!options.initial) options.initial = glyphSet[0];
+            this.target = options.initial;
 
             var i, z, targetIndex = this.glyphSet.indexOf(this.target);
             if (targetIndex == -1) targetIndex = 0;
@@ -142,12 +156,7 @@
     };
 
     $.widget("splitflap.splitflap", {
-        options: {
-            tickLength: 120,
-            glyphSet: glyphSets.alpabetic,
-            initial: "",
-            defaultSegments: 5
-        },
+        options: defaults,
         _create: function () {
             if (!this.element.hasClass("splitflap")) {
                 this.element.addClass("splitflap")
@@ -162,32 +171,51 @@
 
 			if (!this.options.segments) {
                 if (this.options.initial) this.options.segments = this.options.initial.length;
+				else if(this.suppliedElements) this.options.segments = this.suppliedElements.length;
                 else this.options.segments = this.options.defaultSegments;
             }
 
             this.cacheFrames = 2;
 
-            var value, hasUpper = false,
+			if(typeof this.options.glyphSet == "string")
+				this.options.glyphSet = [this.options.glyphSet.split[""]];
+			else if(this.options.glyphSet.length === undefined)
+			{
+				var i = 0,
+					indexed = [];
+				for(s in this.options.glyphSet)
+				{
+					indexed.push(this.options.glyphSet[s]);
+					this.element.find(s).filter(".segment").data("glyphSetIndex", i);
+					i+=1;
+				}
+				this.options.glyphSet = indexed;
+			}
+			else this.options.glyphSet = [this.options.glyphSet];
+
+            var glyph, hasUpper = false,
                 hasLower = false,
-                upper = /[A-Z]/,
-                lower = /[a-z]/
-            for (v in this.options.glyphSet) {
-                value = this.options.glyphSet[v];
-                if (lower.test(value)) hasLower = true;
-                if (upper.test(value)) hasUpper = true;
-                this.options.glyphSet[v] = value.replace(" ", "\u00A0");
+                upper = /[A-Z]+/,
+                lower = /[a-z]+/
+            for (var set in this.options.glyphSet) {
+				for (var g in this.options.glyphSet[set]) {
+					glyph = this.options.glyphSet[set][g];
+					hasLower = lower.test(glyph);
+					hasUpper = upper.test(glyph);
+					this.options.glyphSet[set][g] = glyph.replace(" ", "\u00A0");
+				}
             }
+
             this.caseInsensitive = false;
             if (!(hasUpper && hasLower)) {
                 this.caseInsensitive = true;
-                if (hasUpper) this.
-            case = "upper";
-            else this.case = "lower";
+                if (hasUpper) this.case = "upper";
+				else this.case = "lower";
             }
 
             //Create a segment in an element not attached to the dom in order to harvest CSS animation timing values
             //There has bot to be a better way to avoid writing out so much of this html twice.
-            var tempSeg = new segment(this),
+            var tempSeg = new segment(this, null, {dryrun: true}),
                 tempHtml = tempSeg.element,
                 topFlap = tempSeg.top.children().first(),
                 botFlap = tempSeg.bot.children().first();
@@ -200,7 +228,7 @@
 
             this.segments = [];
             for (var i = 0; i < this.options.segments; i += 1) {
-                this.segments[i] = new segment(this, null, this.options.glyphSet, this.options.initial[i]);
+                this.segments[i] = new segment(this, null, {initial: this.options.initial[i]});
             }
         },
 
@@ -213,16 +241,16 @@
                 }
                 return value.join("");
             }
-            value = value.replace(" ", "\u00A0");
-            if (typeof value == "string") {
-                if (this.caseInsensitive) {
-                    if (this.
-                case =="upper") value = value.toUpperCase();
-                    else value = value.toLowerCase();
+			if(typeof value == "string") value = value.split[""];
+			for(var v in value)
+			{
+				value[v] = value[v].replace(" ", "\u00A0");
+				    if (this.caseInsensitive) {
+                    if (this.case == "upper") value[v] = value[v].toUpperCase();
+                    else value[v] = value[v].toLowerCase();
                 }
+			}
 
-                value = value.split("");
-            }
             for (var i = 0; i < Math.min(value.length, this.segments.length); i += 1) {
                 this.segments[i].flipTo(value[i]);
             }
