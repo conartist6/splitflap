@@ -241,7 +241,7 @@
                 }
                 return value.join("");
             }
-			if(typeof value == "string") value = value.split[""];
+			if(typeof value == "string") value = value.split("");
 			for(var v in value)
 			{
 				value[v] = value[v].replace(" ", "\u00A0");
