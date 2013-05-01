@@ -1,25 +1,25 @@
-    .split-flap .segment
+.splitflap .segment
 {  
     position: relative;
     display: inline-block;
     margin: 0 4px;
 }
 
-.split-flap:after
+.splitflap:after
 {
     content: " ";
     display: table;
     clear: both;
 }
 
-.split-flap .segment ol
+.splitflap .segment ol
 {
     padding: 0;
     margin: 0;
     position: relative;
 }
 
-.split-flap .segment li
+.splitflap .segment li
 {
     position: absolute;
     display: block;
@@ -32,23 +32,23 @@
     width: 100%;
 }
 
-.split-flap .top li:first-child
+.splitflap .top li:first-child
 {
     position: static;
 }
 
-.split-flap .bottom li:last-child
+.splitflap .bottom li:last-child
 {
     position: static;
 }
 
-.split-flap .top li.falling
+.splitflap .top li.falling
 {
     -webkit-transform: scaleY(0);
     transform: scaleY(0);
 }
 
-.split-flap .top li
+.splitflap .top li
 {
     color: #FFF;    
     background-color: #222;
@@ -64,13 +64,13 @@
     transform-origin: 50% 100%;
 }
 
-.split-flap .segment ol.top
+.splitflap .segment ol.top
 {
     margin-bottom: 4px;
     line-height: 1;
 }
 
-.split-flap .bottom li
+.splitflap .bottom li
 {
     color: #CCC;
     line-height: 0;
@@ -88,7 +88,7 @@
     transform: scaleY(0);
 }
 
-.split-flap .bottom li.current, .split-flap .bottom li.falling
+.splitflap .bottom li.current, .splitflap .bottom li.falling
 {
     -webkit-transform: scaleY(1);
     transform: scaleY(1);

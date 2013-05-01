@@ -1,0 +1,32 @@
+	function printRange(start, end)
+	{
+		function lzpad(string, paddedlen)
+		{
+			var	padamt = paddedlen - string.length,
+				o;
+			if(padamt > 0)
+			{
+				for (o=[]; padamt > 0; o[--padamt] = "0");
+				return(o.join("") + string);
+			}
+			return string;
+		}
+		var i,
+			zeropad,
+			output = [];
+		if(parseInt( start ) != NaN)
+		{
+			for(i=-1; start.charAt(i+1) == "0"; i++);
+			lzpad(
+		}
+		
+		if(start.length == 1 && end.length == 1)
+		{
+			start = start.charCodeAt(0);
+			end = end.charCodeAt(0);
+			for(i=start; i<end; i++)
+			{
+				output.push(String.fromCharCode(i));
+			}
+		}
+	}
