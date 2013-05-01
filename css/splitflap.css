@@ -27,7 +27,6 @@
     left: 0;
     overflow: hidden;
     text-align: center;
-    font-size: 150px;
     height: .48em;
     width: 100%;
 }
@@ -66,7 +65,7 @@
 
 .splitflap .segment ol.top
 {
-    margin-bottom: 4px;
+    margin-bottom: .02em;
     line-height: 1;
 }
 

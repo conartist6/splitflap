@@ -195,8 +195,8 @@
 
             var glyph, hasUpper = false,
                 hasLower = false,
-                upper = /[A-Z]+/,
-                lower = /[a-z]+/
+                lower = /[^A-Z]*/,
+                upper = /[^a-z]*/
             for (var set in this.options.glyphSet) {
 				for (var g in this.options.glyphSet[set]) {
 					glyph = this.options.glyphSet[set][g];

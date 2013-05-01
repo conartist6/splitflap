@@ -6,6 +6,7 @@
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script type="text/javascript" src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
   <script type="text/javascript" src="js/splitflap.js"></script>
+  <script type="text/javascript" src="http:////cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js"></script>
   <link type="text/css" rel="stylesheet" href="/css/reset.css" />
   <link type="text/css" rel="stylesheet" href="css/splitflap.css" />
   <style>
@@ -15,7 +16,7 @@
 	  width: 100%;	  
 	  margin: 0 auto;
 	  height: 300px;
-	  top: 40%;
+	  top: 32%;
 	  margin-top: -74px;
 	  text-align: center;
 	  font-size: 30px;
@@ -23,21 +24,28 @@
       .splitflap
       {
 	      font-size: 150px;
-		height: .48em;
-	  margin-bottom: 70px;
+	  margin-bottom: 30px;
       }
       .splitflap .segment
       {
 	  font-family: sans-serif;
 	  width: 145px;
       }
-	  #clock .segment
+	  #clock
 	  {
-		width: 192px;
+	  position: fixed;
+	  bottom: 0;
+	  left: 50%;
+		font-size: 90px;
+		margin: 0 0 20px -178px;
+	  }
+	  #clock .segment
+	  {	
+		width: 120px;
 	  }
 	  .twentyfour li
 	  {
-		text-align: right !important;
+		/*text-align: right !important;*/
 	  }
 	  .twentyfour ol
 	  {
@@ -45,10 +53,21 @@
 	  }
 	  .ampm li
 	  {
-		font-size: 60px !important;
-		width: 120px !important;
+		font-size: 30px !important;
+		width: 58px !important;
 		border-radius: 8px !important;
 	  }
+	  .splitflap .ampm .top li
+      {
+	  border-bottom-left-radius: 0 !important;
+	  border-bottom-right-radius: 0 !important;
+      }
+      .splitflap .ampm .bottom li
+      {
+	  border-top-left-radius: 0 !important;
+	  border-top-right-radius: 0 !important;
+      }
+
       .splitflap .segment:first-child .top li
       {
 	  border-top-left-radius: 20px;
@@ -82,6 +101,11 @@ $(window).load(function(){
 	    e.preventDefault();
 	  });
 
+	function clockInput(time)
+	{
+		return [time.toString("h"), time.toString("mm"), time.toString("tt")];
+	}
+
 	var now = new Date();
 	var clock = $("#clock").splitflap({
 			glyphSet:
@@ -90,23 +114,15 @@ $(window).load(function(){
 					".minutes": $.splitflap.minutes,
 					".ampm": ["AM", "PM"]
 				},
-			initial: [now.getHours().toString(), now.getMinutes().toString(), "AM"]
+			initial: clockInput(now)
 			});
 
-
-  var timeout;
-
-  function customClock() {
+  function updateClock() {
     var now = new Date();
-
-    // Set lag to just after next full second
-    var lag = 1015 - now.getMilliseconds();
-	timeout = setTimeout(customClock, lag);
-
-    $("#clock").splitflap("value", [now.getHours().toString(), now.getMinutes().toString(), "AM"]);
-    
+	setTimeout(updateClock, (62 - now.getSeconds()) * 1000);
+    $("#clock").splitflap("value", clockInput(now));
   }
-  setTimeout(customClock, (62 - now.getSeconds()) * 1000);
+  setTimeout(updateClock, (62 - now.getSeconds()) * 1000);
 
 });//]]>  
 
@@ -121,11 +137,8 @@ $(window).load(function(){
 </form>
 
 <div id="clock">
-    <div class="segment hours twentyfour">
-    </div> :
-    <div class="segment minutes">
-    </div>
-    <div class="segment ampm">
+    <div class="segment hours twentyfour"></div><span style="font-size: 1.1em; font-weight: 600">:</span><div class="segment minutes"></div>
+	<div class="segment ampm">
     </div>
 </div>
 
