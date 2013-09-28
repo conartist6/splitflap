@@ -196,7 +196,7 @@
             var glyph, hasUpper = false,
                 hasLower = false,
                 lower = /[^A-Z]*/,
-                upper = /[^a-z]*/
+                upper = /[^a-z]*/ ;
             for (var set in this.options.glyphSet) {
 				for (var g in this.options.glyphSet[set]) {
 					glyph = this.options.glyphSet[set][g];
@@ -209,8 +209,11 @@
             this.caseInsensitive = false;
             if (!(hasUpper && hasLower)) {
                 this.caseInsensitive = true;
-                if (hasUpper) this.case = "upper";
-				else this.case = "lower";
+                if (hasUpper) {
+			 this.caseLetter = "upper";
+		} else {
+			 this.caseLetter = "lower";
+		}
             }
 
             //Create a segment in an element not attached to the dom in order to harvest CSS animation timing values
@@ -246,7 +249,7 @@
 			{
 				value[v] = value[v].replace(" ", "\u00A0");
 				    if (this.caseInsensitive) {
-                    if (this.case == "upper") value[v] = value[v].toUpperCase();
+                    if (this.caseLetter == "upper") value[v] = value[v].toUpperCase();
                     else value[v] = value[v].toLowerCase();
                 }
 			}
