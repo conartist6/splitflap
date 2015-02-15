@@ -43,7 +43,7 @@
         minutes: numRange("00", "59")
     }
 
-	var defaults = 	{
+	var defaults = {
             tickLength: 120,
             glyphSet: glyphSets.alpabetic,
             initial: "",
@@ -59,9 +59,7 @@
 				if(display.suppliedElements && !options.dryrun)
 				{
 					element = display.suppliedElements.eq(display.segments.length);
-				}
-				else
-				{
+				} else {
 					element = $("<div class=\"segment\"></div>");
 					display.element.append(element);
 				}
@@ -75,6 +73,8 @@
 				glyphSet = glyphSet[glyphSetIndex];
 			}
 			else glyphSet = glyphSet[0];
+
+			this.ignoreCase = !(/A-Z/.test(glyphSet) && /a-z/.test(glyphSet));
 
             this.top = $("<ol class=\"top\"></ol>");
             $.extend(this.top, {
@@ -126,20 +126,37 @@
             this.lastLoaded = wrap(targetIndex + display.cacheFrames - 2);
             this.flipping = false;
         };
+
     segment.prototype.flipTo = function (glyph) {
-        var self = this;
-        if (this.glyphSet.indexOf(glyph) < 0) return;
+        var self = this,
+			glyphMatcher = new RegExp(glyph, this.ignoreCase ? "i" : undefined),
+			setContainsGlyph = false,
+			i;
+
+		for(i=0; i<this.glyphSet.length; i++) {
+			if(glyphMatcher.test(this.glyphSet[i])) {
+				setContainsGlyph = true;
+				break;
+			};
+		}
+	   
+		if(!setContainsGlyph) {
+			return;
+		}
+
         this.target = glyph;
         if (!this.flipping) {
             this.flipping = true;
+
             (function inner() {
-                if (self.top.currentFlap.text() != self.target) {
+                if (!glyphMatcher.exec(self.top.currentFlap.text())) {
                     self.flip();
                     setTimeout(inner, self.display.options.tickLength);
                 } else self.flipping = false;
             })();
         }
     };
+
     segment.prototype.flip = function () {
         this.lastLoaded = (this.lastLoaded + 1) % this.glyphSet.length;
         this.top.currentFlap.addClass("falling");
