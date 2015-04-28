@@ -51,18 +51,18 @@ digits: " 012345679"
 hex: " 0123456789ABCDEF"  
 twelve: ["1","2","3","4","5","6","7","8","9","10","11","12"]  
 twentyfour: see twelve, but longer.  
-minutes: ["00","01","02","3","4","5","6","7","8","9","10","11", ... ,"58","59"]
+minutes: ["00","01","02","03","04","05","06","07","08","09","10","11", ... ,"58","59"]
 
 Example: Clock
 =======
 ```javascript
-$(".clock").splitflap(
-    {
-        glyphSet{
-            ".hours.twentyfour": $.splitflap.twentyfour,
-            ".minutes": $.splitflap.minutes,
-            ".ampm": ["AM", "PM"]
-        }});
+$(".clock").splitflap({
+    glyphSet: {
+        ".hours.twentyfour": $.splitflap.twentyfour,
+        ".minutes": $.splitflap.minutes,
+        ".ampm": ["AM", "PM"]
+    }
+});
 ```
 ```css
 .hours, .minutes
