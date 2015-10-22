@@ -45,7 +45,7 @@
 
 	var defaults = {
             tickLength: 120,
-            glyphSet: glyphSets.alpabetic,
+            glyphSet: glyphSets.alphabetic,
             initial: "",
             defaultSegments: 5
         }
